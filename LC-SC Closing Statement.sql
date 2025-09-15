@@ -4,8 +4,8 @@ SELECT
     bb.BRAND_NAME AS BUYER_BRAND,
     csc.INTERNAL_FILE_NO AS FILE_REF, 
     cel.EXPORT_LC_NO AS LC_NUMBER, 
-    csc.CONTRACT_NO AS "SC/MASTER LC NO."  
-
+    csc.CONTRACT_NO AS "SC/MASTER LC NO.",
+    cel.ESTIMATED_QNTY
 FROM 
     WO_PO_DETAILS_MASTER wpdm
 JOIN 
@@ -27,8 +27,6 @@ WHERE
     AND wpdm.status_active = 1
     AND wpbd.Is_deleted = 0
     AND wpbd.status_active = 1
-    AND lc.COMPANY_SHORT_NAME = 'MTSL'
-
 GROUP BY 
     lc.COMPANY_SHORT_NAME, 
     lb.SHORT_NAME,
@@ -36,7 +34,7 @@ GROUP BY
     wpdm.JOB_NO,
     csc.INTERNAL_FILE_NO,
     csc.CONTRACT_NO,  
-    cscoi.ATTACHED_QNTY, cel.EXPORT_LC_NO,
-    cscoi.ATTACHED_VALUE
+    cel.EXPORT_LC_NO,
+    cel.ESTIMATED_QNTY
 ORDER BY 
-    wpdm.JOB_NO; 
+    wpdm.JOB_NO;
