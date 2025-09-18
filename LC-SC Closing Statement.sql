@@ -5,8 +5,9 @@ SELECT
     csc.INTERNAL_FILE_NO AS FILE_REF, 
     cel.EXPORT_LC_NO AS LC_NUMBER, 
     csc.CONTRACT_NO AS "SC/MASTER LC NO.",
-    csc.ESTIMATED_QNTY,
-    cscoi.ATTACHED_QNTY
+    cel.ESTIMATED_QNTY,
+    cscoi.ATTACHED_QNTY,
+    cscoi.ATTACHED_VALUE
 FROM 
     WO_PO_DETAILS_MASTER wpdm
 JOIN 
@@ -36,7 +37,6 @@ WHERE
     AND wpdm.status_active = 1
     AND wpbd.Is_deleted = 0
     AND wpbd.status_active = 1
-  
 GROUP BY 
     lc.COMPANY_SHORT_NAME, 
     lb.SHORT_NAME,
@@ -45,7 +45,8 @@ GROUP BY
     csc.INTERNAL_FILE_NO,
     csc.CONTRACT_NO,  
     cel.EXPORT_LC_NO,
-    cel.ESTIMATED_QNTY, csc.ESTIMATED_QNTY,
-    cscoi.ATTACHED_QNTY
+    cel.ESTIMATED_QNTY,
+    cscoi.ATTACHED_QNTY,
+    cscoi.ATTACHED_VALUE
 ORDER BY 
     wpdm.JOB_NO;
